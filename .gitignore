@@ -6,11 +6,17 @@
 */DerivedDataCache
 */Intermediate
 */Saved
-*/Content/StarterContent
-
+*/Content/StarterContent/Textures
+*/Content/StarterContent/HDRI
 
 ##########################
 # XCode Generated Files  #
 ##########################
 */*.xcworkspace
 **/.xcuserdata
+
+
+##########################
+#  Mac Generated Folders #
+##########################
+**/.DS_Store
