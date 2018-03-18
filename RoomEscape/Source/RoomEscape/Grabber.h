@@ -30,6 +30,10 @@ public:
     virtual void Grab();
     
     virtual void Release();
+    
+    virtual FVector GetReachLineStart();
+    
+    virtual FVector GetReachLineEnd();
 
 private:
     // How far can the player reach in cm
