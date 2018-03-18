@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Components/InputComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
+
 #include "Grabber.generated.h"
 
 
@@ -23,10 +26,24 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+    // Ray-cast, reach and grab
+    virtual void Grab();
+    
+    virtual void Release();
 
 private:
     // How far can the player reach in cm
     UPROPERTY(EditAnywhere)
     float Reach = 50.f;
+    
+    UPhysicsHandleComponent* PhysicsHandle = nullptr;
+    
+    UInputComponent* InputComponent = nullptr;
+    
+    virtual void FindPhysicsHandleComponent();
+    
+    virtual void BindInputComponent();
+    
+    const FHitResult GetFirstPhysicsBodyInReach();
 	
 };
