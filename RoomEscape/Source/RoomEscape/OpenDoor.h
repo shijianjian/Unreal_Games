@@ -8,6 +8,8 @@
 
 #include "OpenDoor.generated.h"
 
+// For using BlueprintAssignable
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ROOMESCAPE_API UOpenDoor : public UActorComponent
@@ -28,21 +30,27 @@ public:
     
     virtual void OpenDoor();
     virtual void CloseDoor();
+    
+    UPROPERTY(BlueprintAssignable)
+    FOnOpenRequest OnOpenRequest;
 
 private:
     UPROPERTY(EditAnywhere)
     float OpenAngle = -60.f;
     
     UPROPERTY(EditAnywhere)
-    ATriggerVolume* PressurePlate;
+    ATriggerVolume* PressurePlate = nullptr;
+    
+    UPROPERTY(EditAnywhere)
+    float TriggerMass = 40.f;
     
     UPROPERTY(EditAnywhere)
     float DoorCloseDelay = .5f;
     
     float LastDoorOpenTime;
     
-    AActor* ActorThatOpens; // Remember `APawn` inherits from `AActor`
+    AActor* Owner = nullptr; // who owns the door
     
-    AActor* Owner; // who owns the door
+    float GetTotalMassOfActorsOnPlate();
 	
 };

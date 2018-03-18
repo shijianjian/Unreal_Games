@@ -38,7 +38,7 @@ public:
 private:
     // How far can the player reach in cm
     UPROPERTY(EditAnywhere)
-    float Reach = 50.f;
+    float Reach = 80.f;
     
     UPhysicsHandleComponent* PhysicsHandle = nullptr;
     
