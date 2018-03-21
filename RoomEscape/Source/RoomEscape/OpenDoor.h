@@ -9,7 +9,7 @@
 #include "OpenDoor.generated.h"
 
 // For using BlueprintAssignable
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ROOMESCAPE_API UOpenDoor : public UActorComponent
@@ -28,11 +28,11 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
     
-    virtual void OpenDoor();
-    virtual void CloseDoor();
+    UPROPERTY(BlueprintAssignable)
+    FDoorEvent OnClose;
     
     UPROPERTY(BlueprintAssignable)
-    FOnOpenRequest OnOpenRequest;
+    FDoorEvent OnOpen;
 
 private:
     UPROPERTY(EditAnywhere)
@@ -43,11 +43,6 @@ private:
     
     UPROPERTY(EditAnywhere)
     float TriggerMass = 40.f;
-    
-    UPROPERTY(EditAnywhere)
-    float DoorCloseDelay = .5f;
-    
-    float LastDoorOpenTime;
     
     AActor* Owner = nullptr; // who owns the door
     
